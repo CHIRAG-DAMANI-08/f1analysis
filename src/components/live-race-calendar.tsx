@@ -2,15 +2,31 @@
 
 import { useEffect, useState } from "react";
 import { Race } from "@/types/race";
-import { Calendar, Flag } from "lucide-react";
+import { Calendar, Flag, MapPin, Trophy } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate, getTimeRemaining } from "@/utils/utils";
+
+// Helper function to use the image proxy
+const getProxiedImageUrl = (url: string) => {
+  if (!url) return "";
+  // If the URL is already using our proxy, return it as is
+  if (url.includes("/api/image-proxy")) return url;
+  // Otherwise, proxy the URL
+  return `/api/image-proxy?url=${encodeURIComponent(url)}`;
+};
 
 export default function LiveRaceCalendar() {
   const [races, setRaces] = useState<Race[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Function to determine if a race is in the current or future season
+  const isCurrentOrFutureSeason = (date: string) => {
+    const raceDate = new Date(date);
+    const currentYear = new Date().getFullYear();
+    return raceDate.getFullYear() >= currentYear;
+  };
 
   useEffect(() => {
     async function fetchRaces() {
@@ -23,7 +39,11 @@ export default function LiveRaceCalendar() {
         }
 
         const data = await response.json();
-        setRaces(data);
+        // Filter to show current and future season races
+        const currentAndFutureRaces = data.filter((race) =>
+          isCurrentOrFutureSeason(race.date),
+        );
+        setRaces(currentAndFutureRaces);
       } catch (err) {
         console.error("Error fetching live races:", err);
         setError("Failed to load upcoming races. Please try again later.");
@@ -107,16 +127,21 @@ export default function LiveRaceCalendar() {
                   >
                     <div className="relative h-40 w-full">
                       <Image
-                        src={race.image}
+                        src={getProxiedImageUrl(
+                          race.image ||
+                            `https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=800&q=80`,
+                        )}
                         alt={race.name}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        unoptimized // Use this for external images through our proxy
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
                       <div className="absolute top-3 right-3">
                         {isUpcoming && (
-                          <div className="bg-red-600 text-white text-xs px-2 py-1 rounded-full">
-                            Upcoming
+                          <div className="bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                            <Trophy className="h-3 w-3" />
+                            <span>Upcoming</span>
                           </div>
                         )}
                       </div>
@@ -124,7 +149,10 @@ export default function LiveRaceCalendar() {
                         <h3 className="font-bold text-xl group-hover:text-red-500 transition-colors">
                           {race.name}
                         </h3>
-                        <p className="text-gray-300">{formatDate(race.date)}</p>
+                        <p className="text-gray-300 flex items-center gap-1">
+                          <Calendar className="h-3.5 w-3.5" />
+                          {formatDate(race.date)}
+                        </p>
                       </div>
                     </div>
 
@@ -135,7 +163,8 @@ export default function LiveRaceCalendar() {
                           <p className="font-medium">{race.circuit}</p>
                         </div>
                         <div>
-                          <span className="text-sm text-gray-400">
+                          <span className="text-sm text-gray-400 flex items-center gap-1">
+                            <MapPin className="h-3.5 w-3.5" />
                             Location
                           </span>
                           <p className="font-medium">
@@ -150,7 +179,9 @@ export default function LiveRaceCalendar() {
                             {timeRemaining.days > 0 ? (
                               <span>Race in {timeRemaining.days} days</span>
                             ) : (
-                              <span>Race today!</span>
+                              <span className="text-red-500 font-medium">
+                                Race today!
+                              </span>
                             )}
                           </div>
                           <div className="flex items-center gap-1 text-red-500 group-hover:text-red-400">

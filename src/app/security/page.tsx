@@ -95,4 +95,10 @@ export default function SecurityPage() {
                 Reporting Security Issues
               </h2>
               <p className="text-gray-300 mb-6">
-                If you discover a security vulnerability or have concerns about the security of our platform, please contact our security
+                If you discover a security vulnerability or have concerns about the security of our platform, please contact our security team immediately at security@f1predictor.com. We take all security reports seriously and will investigate promptly.
+              </p>
+              <div className="flex justify-center mt-6">
+                <a href="mailto:security@f1predictor.com" className="inline-flex items-center px-6 py-3 bg-red-600 rounded-lg hover:bg-red-700 transition-colors font-medium">
+                  Contact Security Team
+                </a>
+              </div>

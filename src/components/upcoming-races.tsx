@@ -18,18 +18,24 @@ export default function UpcomingRaces() {
         {upcomingRaces.map((race) => (
           <div
             key={race.id}
-            className="flex items-center gap-4 p-3 bg-gray-700 rounded-lg hover:bg-gray-650 transition-colors"
+            className="flex items-center gap-4 p-3 bg-gray-700 rounded-lg hover:bg-gray-650 transition-colors group"
           >
             <div className="relative w-16 h-16 rounded-md overflow-hidden flex-shrink-0">
               <Image
-                src={race.image}
+                src={
+                  race.image ||
+                  `https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?w=400&q=80`
+                }
                 alt={race.name}
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-110 transition-transform duration-300"
               />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/30 to-transparent"></div>
             </div>
             <div className="flex-grow">
-              <h4 className="font-medium">{race.name}</h4>
+              <h4 className="font-medium group-hover:text-red-400 transition-colors">
+                {race.name}
+              </h4>
               <p className="text-sm text-gray-400">
                 {formatDate(race.date)} • {race.location}, {race.country}
               </p>

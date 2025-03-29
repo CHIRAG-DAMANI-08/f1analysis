@@ -1,11 +1,14 @@
 import DashboardNavbar from "@/components/dashboard-navbar";
-import { races } from "@/lib/data";
+import { fetchRaceSchedule } from "@/lib/api";
+import { races as initialRaces } from "@/lib/data";
 import { MapPin, Flag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/utils";
 
-export default function TracksPage() {
+export default async function TracksPage() {
+  // Fetch races from API, fallback to initial data if needed
+  const races = await fetchRaceSchedule().catch(() => initialRaces);
   return (
     <>
       <DashboardNavbar />

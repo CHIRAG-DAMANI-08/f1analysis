@@ -8,7 +8,7 @@ export const drivers: Driver[] = [
     number: 1,
     points: 374,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/2col-retina/image.png",
     country: "Netherlands",
     podiums: 103,
     championships: 3,
@@ -22,7 +22,7 @@ export const drivers: Driver[] = [
     number: 11,
     points: 150,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/S/SERPER01_Sergio_Perez/serper01.png.transform/2col-retina/image.png",
     country: "Mexico",
     podiums: 38,
     championships: 0,
@@ -36,7 +36,7 @@ export const drivers: Driver[] = [
     number: 16,
     points: 224,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/2col-retina/image.png",
     country: "Monaco",
     podiums: 32,
     championships: 0,
@@ -50,7 +50,7 @@ export const drivers: Driver[] = [
     number: 55,
     points: 200,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/2col-retina/image.png",
     country: "Spain",
     podiums: 20,
     championships: 0,
@@ -64,7 +64,7 @@ export const drivers: Driver[] = [
     number: 44,
     points: 190,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/2col-retina/image.png",
     country: "United Kingdom",
     podiums: 197,
     championships: 7,
@@ -78,7 +78,7 @@ export const drivers: Driver[] = [
     number: 63,
     points: 156,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/2col-retina/image.png",
     country: "United Kingdom",
     podiums: 14,
     championships: 0,
@@ -92,7 +92,7 @@ export const drivers: Driver[] = [
     number: 4,
     points: 246,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/2col-retina/image.png",
     country: "United Kingdom",
     podiums: 18,
     championships: 0,
@@ -106,7 +106,7 @@ export const drivers: Driver[] = [
     number: 81,
     points: 155,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png.transform/2col-retina/image.png",
     country: "Australia",
     podiums: 5,
     championships: 0,
@@ -120,7 +120,7 @@ export const drivers: Driver[] = [
     number: 14,
     points: 116,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/F/FERALO01_Fernando_Alonso/feralo01.png.transform/2col-retina/image.png",
     country: "Spain",
     podiums: 106,
     championships: 2,
@@ -134,7 +134,7 @@ export const drivers: Driver[] = [
     number: 18,
     points: 24,
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/drivers/L/LANSTR01_Lance_Stroll/lanstr01.png.transform/2col-retina/image.png",
     country: "Canada",
     podiums: 3,
     championships: 0,
@@ -147,7 +147,7 @@ export const teams: Team[] = [
   {
     id: "red-bull",
     name: "Red Bull Racing",
-    logo: "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=200&q=80",
+    logo: "https://www.formula1.com/content/dam/fom-website/teams/2024/red-bull-racing.png.transform/2col-retina/image.png",
     color: "#0600EF",
     constructorPoints: 524,
     drivers: drivers.filter((d) => d.team === "Red Bull Racing"),
@@ -155,7 +155,7 @@ export const teams: Team[] = [
   {
     id: "ferrari",
     name: "Ferrari",
-    logo: "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=200&q=80",
+    logo: "https://www.formula1.com/content/dam/fom-website/teams/2024/ferrari.png.transform/2col-retina/image.png",
     color: "#DC0000",
     constructorPoints: 424,
     drivers: drivers.filter((d) => d.team === "Ferrari"),
@@ -163,7 +163,7 @@ export const teams: Team[] = [
   {
     id: "mercedes",
     name: "Mercedes",
-    logo: "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=200&q=80",
+    logo: "https://www.formula1.com/content/dam/fom-website/teams/2024/mercedes.png.transform/2col-retina/image.png",
     color: "#00D2BE",
     constructorPoints: 346,
     drivers: drivers.filter((d) => d.team === "Mercedes"),
@@ -171,7 +171,7 @@ export const teams: Team[] = [
   {
     id: "mclaren",
     name: "McLaren",
-    logo: "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=200&q=80",
+    logo: "https://www.formula1.com/content/dam/fom-website/teams/2024/mclaren.png.transform/2col-retina/image.png",
     color: "#FF8700",
     constructorPoints: 401,
     drivers: drivers.filter((d) => d.team === "McLaren"),
@@ -179,7 +179,7 @@ export const teams: Team[] = [
   {
     id: "aston-martin",
     name: "Aston Martin",
-    logo: "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=200&q=80",
+    logo: "https://www.formula1.com/content/dam/fom-website/teams/2024/aston-martin.png.transform/2col-retina/image.png",
     color: "#006F62",
     constructorPoints: 140,
     drivers: drivers.filter((d) => d.team === "Aston Martin"),
@@ -195,9 +195,9 @@ export const races: Race[] = [
     country: "Monaco",
     date: "2023-05-28",
     image:
-      "https://images.unsplash.com/photo-1586802990183-13e7a76b679b?w=800&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Monaco_Circuit.png.transform/7col-retina/image.png",
     trackMap:
-      "https://images.unsplash.com/photo-1586802990183-13e7a76b679b?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Monaco_Circuit.png.transform/7col-retina/image.png",
     laps: 78,
     distance: 260.286,
     lapRecord: {
@@ -214,9 +214,9 @@ export const races: Race[] = [
     country: "Canada",
     date: "2023-06-18",
     image:
-      "https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?w=800&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Canada_Circuit.png.transform/7col-retina/image.png",
     trackMap:
-      "https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Canada_Circuit.png.transform/7col-retina/image.png",
     laps: 70,
     distance: 305.27,
     lapRecord: {
@@ -233,9 +233,9 @@ export const races: Race[] = [
     country: "United Kingdom",
     date: "2023-07-09",
     image:
-      "https://images.unsplash.com/photo-1527481138388-31827a7c94d5?w=800&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Great_Britain_Circuit.png.transform/7col-retina/image.png",
     trackMap:
-      "https://images.unsplash.com/photo-1527481138388-31827a7c94d5?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Great_Britain_Circuit.png.transform/7col-retina/image.png",
     laps: 52,
     distance: 306.198,
     lapRecord: {
@@ -252,9 +252,9 @@ export const races: Race[] = [
     country: "Hungary",
     date: "2023-07-23",
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=800&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Hungary_Circuit.png.transform/7col-retina/image.png",
     trackMap:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Hungary_Circuit.png.transform/7col-retina/image.png",
     laps: 70,
     distance: 306.63,
     lapRecord: {
@@ -271,9 +271,9 @@ export const races: Race[] = [
     country: "Belgium",
     date: "2023-07-30",
     image:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=800&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Belgium_Circuit.png.transform/7col-retina/image.png",
     trackMap:
-      "https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=400&q=80",
+      "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Belgium_Circuit.png.transform/7col-retina/image.png",
     laps: 44,
     distance: 308.052,
     lapRecord: {

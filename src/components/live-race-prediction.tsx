@@ -27,6 +27,69 @@ export default function LiveRacePrediction({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [refreshInterval, setRefreshInterval] = useState<number>(
+    15 * 60 * 1000,
+  ); // Default 15 minutes
+  const [raceStatus, setRaceStatus] = useState<string>("Upcoming");
+  const [isLive, setIsLive] = useState<boolean>(false);
+
+  // Determine race status and appropriate refresh interval
+  useEffect(() => {
+    const checkRaceStatus = () => {
+      const now = new Date();
+      const race = new Date(raceDate);
+
+      // For demo purposes: Consider race as live if it's within 2 days (past or future)
+      const timeDiff = Math.abs(now.getTime() - race.getTime());
+      const daysDiff = timeDiff / (1000 * 3600 * 24);
+
+      if (daysDiff <= 2) {
+        // Race is considered live or very close
+        setIsLive(true);
+
+        // Determine exact status
+        if (now < race) {
+          // Race is today but hasn't started
+          setRaceStatus("Pre-race");
+          setRefreshInterval(5 * 60 * 1000); // 5 minutes
+        } else if (now.getTime() - race.getTime() < 4 * 60 * 60 * 1000) {
+          // Race is likely in progress (assuming ~4 hours for a race)
+          setRaceStatus("Live");
+          setRefreshInterval(30 * 1000); // 30 seconds during live race
+        } else {
+          // Race recently finished
+          setRaceStatus("Post-race");
+          setRefreshInterval(10 * 60 * 1000); // 10 minutes
+        }
+      } else if (now < race) {
+        // Upcoming race
+        setIsLive(false);
+        setRaceStatus("Upcoming");
+
+        // Calculate days until race
+        const daysUntil = Math.ceil(daysDiff);
+        if (daysUntil <= 7) {
+          // Race week
+          setRefreshInterval(60 * 60 * 1000); // Hourly during race week
+        } else {
+          setRefreshInterval(24 * 60 * 60 * 1000); // Daily otherwise
+        }
+      } else {
+        // Past race
+        setIsLive(false);
+        setRaceStatus("Completed");
+        setRefreshInterval(24 * 60 * 60 * 1000); // Daily
+      }
+    };
+
+    checkRaceStatus();
+    // Check race status every minute
+    const statusInterval = setInterval(checkRaceStatus, 60 * 1000);
+
+    return () => clearInterval(statusInterval);
+  }, [raceDate]);
+
+  // Fetch data with dynamic refresh interval
   useEffect(() => {
     async function fetchData() {
       try {
@@ -51,7 +114,7 @@ export default function LiveRacePrediction({
 
         // Now fetch the prediction for this race
         const predictionResponse = await fetch(
-          `/api/live-predictions?raceId=${raceId}`,
+          `/api/live-predictions?raceId=${raceId}&status=${raceStatus}`,
         );
 
         if (!predictionResponse.ok) {
@@ -73,12 +136,12 @@ export default function LiveRacePrediction({
     if (raceId) {
       fetchData();
 
-      // Set up a refresh interval to update predictions frequently
-      const refreshInterval = setInterval(fetchData, 15 * 60 * 1000); // Refresh every 15 minutes
+      // Set up a refresh interval with dynamic timing based on race status
+      const dataRefreshInterval = setInterval(fetchData, refreshInterval);
 
-      return () => clearInterval(refreshInterval);
+      return () => clearInterval(dataRefreshInterval);
     }
-  }, [raceId]);
+  }, [raceId, refreshInterval, raceStatus]);
 
   if (loading) {
     return (
@@ -182,8 +245,29 @@ export default function LiveRacePrediction({
         ))}
       </div>
 
-      <div className="text-xs text-gray-400 text-right mt-2">
-        Last updated: {new Date(prediction.lastUpdated).toLocaleString()}
+      <div className="flex justify-between items-center text-xs text-gray-400 mt-2">
+        <div className="flex items-center">
+          {isLive && (
+            <>
+              <span className="relative flex h-2 w-2 mr-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+              </span>
+              <span className="text-red-500 font-medium">{raceStatus}</span>
+              <span className="mx-2">•</span>
+            </>
+          )}
+          <span>
+            {isLive
+              ? `Updates every ${refreshInterval / 1000} seconds`
+              : raceStatus === "Upcoming"
+                ? `Updates daily`
+                : `Final results`}
+          </span>
+        </div>
+        <div>
+          Last updated: {new Date(prediction.lastUpdated).toLocaleString()}
+        </div>
       </div>
     </section>
   );

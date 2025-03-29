@@ -43,10 +43,14 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/dashboard"
+              href="/live-dashboard"
               className="px-8 py-4 bg-red-600 rounded-lg hover:bg-red-700 transition-colors text-lg font-medium inline-flex items-center"
             >
-              View Predictions
+              <span className="relative flex h-2 w-2 mr-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+              </span>
+              Live Dashboard
               <ArrowUpRight className="ml-2 w-5 h-5" />
             </Link>
             <Link
@@ -210,7 +214,7 @@ export default function Home() {
             enhance their race weekend experience.
           </p>
           <Link
-            href="/dashboard"
+            href="/live-dashboard"
             className="inline-flex items-center px-8 py-4 text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors font-medium"
           >
             Get Started Now

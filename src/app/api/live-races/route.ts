@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { fetchRaceSchedule } from "@/lib/api";
 
+export const dynamic = "force-dynamic"; // Ensure this route is never cached
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -8,9 +10,13 @@ export async function GET(request: Request) {
 
     const races = await fetchRaceSchedule(season);
 
-    // Filter for upcoming races (dates in the future)
-    // We'll use the races directly since our fetchRaceSchedule now handles empty results
-    return NextResponse.json(races);
+    // Return the races with cache control headers to prevent caching
+    return NextResponse.json(races, {
+      headers: {
+        "Cache-Control": "no-store, max-age=0",
+        "Surrogate-Control": "no-store",
+      },
+    });
   } catch (error) {
     console.error("Error in live-races API route:", error);
     return NextResponse.json(

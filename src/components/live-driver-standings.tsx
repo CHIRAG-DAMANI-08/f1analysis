@@ -6,6 +6,15 @@ import { Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+// Helper function to use the image proxy
+const getProxiedImageUrl = (url: string) => {
+  if (!url) return "";
+  // If the URL is already using our proxy, return it as is
+  if (url.includes("/api/image-proxy")) return url;
+  // Otherwise, proxy the URL
+  return `/api/image-proxy?url=${encodeURIComponent(url)}`;
+};
+
 export default function LiveDriverStandings() {
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const [loading, setLoading] = useState(true);
@@ -76,10 +85,11 @@ export default function LiveDriverStandings() {
         >
           <div className="relative h-48 w-full">
             <Image
-              src={driver.image}
+              src={getProxiedImageUrl(driver.image)}
               alt={driver.name}
               fill
               className="object-cover"
+              unoptimized // Use this for external images through our proxy
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-4 w-full">

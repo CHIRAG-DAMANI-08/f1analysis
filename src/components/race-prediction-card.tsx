@@ -33,9 +33,20 @@ export default function RacePredictionCard({
 
   return (
     <section className="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-lg">
-      <div className="flex items-center gap-2 mb-4">
-        <Flag className="text-red-500" />
-        <h2 className="font-semibold text-xl">Race Prediction</h2>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <Flag className="text-red-500" />
+          <h2 className="font-semibold text-xl">Race Prediction</h2>
+        </div>
+        <Link href={`/races/${race.id}/live-prediction`}>
+          <span className="px-3 py-1 bg-red-600/20 border border-red-600/30 text-red-400 rounded-full text-xs flex items-center gap-1">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+            </span>
+            LIVE
+          </span>
+        </Link>
       </div>
 
       <div className="relative rounded-lg overflow-hidden mb-6 h-48">
@@ -79,10 +90,10 @@ export default function RacePredictionCard({
       </div>
 
       <Link
-        href={`/races/${race.id}`}
+        href={`/races/${race.id}/live-prediction`}
         className="block w-full text-center py-3 bg-red-600 hover:bg-red-700 transition-colors rounded-lg font-medium"
       >
-        View Detailed Prediction
+        View Live Prediction
       </Link>
     </section>
   );

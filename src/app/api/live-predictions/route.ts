@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { generateRacePredictions } from "@/lib/api";
 
+export const dynamic = "force-dynamic"; // Ensure this route is never cached
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const raceId = searchParams.get("raceId");
+    const raceStatus = searchParams.get("status") || "Upcoming";
 
     if (!raceId) {
       return NextResponse.json(
@@ -13,7 +16,8 @@ export async function GET(request: Request) {
       );
     }
 
-    const prediction = await generateRacePredictions(raceId);
+    // Generate a fresh prediction every time this endpoint is called
+    const prediction = await generateRacePredictions(raceId, raceStatus);
 
     if (!prediction) {
       return NextResponse.json(
@@ -22,7 +26,13 @@ export async function GET(request: Request) {
       );
     }
 
-    return NextResponse.json(prediction);
+    // Add cache control headers to prevent caching
+    return NextResponse.json(prediction, {
+      headers: {
+        "Cache-Control": "no-store, max-age=0",
+        "Surrogate-Control": "no-store",
+      },
+    });
   } catch (error) {
     console.error("Error in live-predictions API route:", error);
     return NextResponse.json(

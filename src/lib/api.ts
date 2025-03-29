@@ -42,18 +42,20 @@ export async function fetchRaceSchedule(season = "current"): Promise<Race[]> {
 
     // If no races are returned or all races are in the past, add upcoming races manually
     const now = new Date();
+    const currentYear = now.getFullYear();
+    const nextYear = currentYear + 1;
     const futureRaces = races.filter((race) => new Date(race.date) >= now);
 
     if (futureRaces.length === 0) {
-      // Add upcoming races manually
-      const upcomingRaces = [
+      // Add upcoming races for current year
+      const currentYearRaces = [
         {
           id: "23",
           name: "Australian Grand Prix",
           circuit: "Albert Park Circuit",
           location: "Melbourne",
           country: "Australia",
-          date: "2024-03-24", // Set to a future date
+          date: `${currentYear}-03-24`,
           image: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=800&q=80`,
           trackMap: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=400&q=80`,
           laps: 58,
@@ -70,7 +72,7 @@ export async function fetchRaceSchedule(season = "current"): Promise<Race[]> {
           circuit: "Suzuka Circuit",
           location: "Suzuka",
           country: "Japan",
-          date: "2024-04-07", // Set to a future date
+          date: `${currentYear}-04-07`,
           image: `https://images.unsplash.com/photo-1506844583096-2f029d8b40f9?w=800&q=80`,
           trackMap: `https://images.unsplash.com/photo-1506844583096-2f029d8b40f9?w=400&q=80`,
           laps: 53,
@@ -87,7 +89,7 @@ export async function fetchRaceSchedule(season = "current"): Promise<Race[]> {
           circuit: "Shanghai International Circuit",
           location: "Shanghai",
           country: "China",
-          date: "2024-04-21", // Set to a future date
+          date: `${currentYear}-04-21`,
           image: `https://images.unsplash.com/photo-1533106958148-daaeab8b83fe?w=800&q=80`,
           trackMap: `https://images.unsplash.com/photo-1533106958148-daaeab8b83fe?w=400&q=80`,
           laps: 56,
@@ -100,14 +102,273 @@ export async function fetchRaceSchedule(season = "current"): Promise<Race[]> {
         },
       ];
 
-      races = upcomingRaces;
+      // Add upcoming races for next year
+      const nextYearRaces = [
+        {
+          id: "2025-1",
+          name: "Bahrain Grand Prix",
+          circuit: "Bahrain International Circuit",
+          location: "Sakhir",
+          country: "Bahrain",
+          date: `${nextYear}-03-08`,
+          image: `https://images.unsplash.com/photo-1687592251375-e5d7a2c1b0c2?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1687592251375-e5d7a2c1b0c2?w=400&q=80`,
+          laps: 57,
+          distance: 308.238,
+          lapRecord: {
+            time: "1:31.447",
+            driver: "Pedro de la Rosa",
+            year: 2005,
+          },
+        },
+        {
+          id: "2025-2",
+          name: "Saudi Arabian Grand Prix",
+          circuit: "Jeddah Corniche Circuit",
+          location: "Jeddah",
+          country: "Saudi Arabia",
+          date: `${nextYear}-03-15`,
+          image: `https://images.unsplash.com/photo-1646222088908-7e5fc1c2d2e3?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1646222088908-7e5fc1c2d2e3?w=400&q=80`,
+          laps: 50,
+          distance: 308.45,
+          lapRecord: {
+            time: "1:30.734",
+            driver: "Lewis Hamilton",
+            year: 2021,
+          },
+        },
+        {
+          id: "2025-3",
+          name: "Australian Grand Prix",
+          circuit: "Albert Park Circuit",
+          location: "Melbourne",
+          country: "Australia",
+          date: `${nextYear}-03-29`,
+          image: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=400&q=80`,
+          laps: 58,
+          distance: 307.574,
+          lapRecord: {
+            time: "1:20.235",
+            driver: "Charles Leclerc",
+            year: 2022,
+          },
+        },
+        {
+          id: "2025-4",
+          name: "Japanese Grand Prix",
+          circuit: "Suzuka Circuit",
+          location: "Suzuka",
+          country: "Japan",
+          date: `${nextYear}-04-12`,
+          image: `https://images.unsplash.com/photo-1506844583096-2f029d8b40f9?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1506844583096-2f029d8b40f9?w=400&q=80`,
+          laps: 53,
+          distance: 307.471,
+          lapRecord: {
+            time: "1:30.983",
+            driver: "Lewis Hamilton",
+            year: 2019,
+          },
+        },
+        {
+          id: "2025-5",
+          name: "Chinese Grand Prix",
+          circuit: "Shanghai International Circuit",
+          location: "Shanghai",
+          country: "China",
+          date: `${nextYear}-04-26`,
+          image: `https://images.unsplash.com/photo-1533106958148-daaeab8b83fe?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1533106958148-daaeab8b83fe?w=400&q=80`,
+          laps: 56,
+          distance: 305.066,
+          lapRecord: {
+            time: "1:32.238",
+            driver: "Michael Schumacher",
+            year: 2004,
+          },
+        },
+        {
+          id: "2025-6",
+          name: "Miami Grand Prix",
+          circuit: "Miami International Autodrome",
+          location: "Miami",
+          country: "United States",
+          date: `${nextYear}-05-10`,
+          image: `https://images.unsplash.com/photo-1598026553590-8b2a5f0c6d2a?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1598026553590-8b2a5f0c6d2a?w=400&q=80`,
+          laps: 57,
+          distance: 308.326,
+          lapRecord: {
+            time: "1:29.708",
+            driver: "Max Verstappen",
+            year: 2023,
+          },
+        },
+        {
+          id: "2025-7",
+          name: "Las Vegas Grand Prix",
+          circuit: "Las Vegas Strip Circuit",
+          location: "Las Vegas",
+          country: "United States",
+          date: `${nextYear}-11-22`,
+          image: `https://images.unsplash.com/photo-1581351721010-8cf859cb14a4?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1581351721010-8cf859cb14a4?w=400&q=80`,
+          laps: 50,
+          distance: 310.0,
+          lapRecord: {
+            time: "1:35.490",
+            driver: "Oscar Piastri",
+            year: 2023,
+          },
+        },
+        {
+          id: "2025-8",
+          name: "Qatar Grand Prix",
+          circuit: "Lusail International Circuit",
+          location: "Lusail",
+          country: "Qatar",
+          date: `${nextYear}-12-01`,
+          image: `https://images.unsplash.com/photo-1644214225-4feb49f8c103?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1644214225-4feb49f8c103?w=400&q=80`,
+          laps: 57,
+          distance: 308.611,
+          lapRecord: {
+            time: "1:24.319",
+            driver: "Max Verstappen",
+            year: 2023,
+          },
+        },
+        {
+          id: "2025-9",
+          name: "Abu Dhabi Grand Prix",
+          circuit: "Yas Marina Circuit",
+          location: "Abu Dhabi",
+          country: "UAE",
+          date: `${nextYear}-12-14`,
+          image: `https://images.unsplash.com/photo-1583870908951-71149f42bcf9?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1583870908951-71149f42bcf9?w=400&q=80`,
+          laps: 58,
+          distance: 306.183,
+          lapRecord: {
+            time: "1:26.103",
+            driver: "Max Verstappen",
+            year: 2021,
+          },
+        },
+      ];
+
+      // Combine current and next year races
+      races = [...currentYearRaces, ...nextYearRaces];
+    } else {
+      // Add next year races to existing races
+      const nextYearRaces = [
+        {
+          id: "2025-1",
+          name: "Bahrain Grand Prix",
+          circuit: "Bahrain International Circuit",
+          location: "Sakhir",
+          country: "Bahrain",
+          date: `${nextYear}-03-08`,
+          image: `https://images.unsplash.com/photo-1687592251375-e5d7a2c1b0c2?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1687592251375-e5d7a2c1b0c2?w=400&q=80`,
+          laps: 57,
+          distance: 308.238,
+          lapRecord: {
+            time: "1:31.447",
+            driver: "Pedro de la Rosa",
+            year: 2005,
+          },
+        },
+        {
+          id: "2025-2",
+          name: "Saudi Arabian Grand Prix",
+          circuit: "Jeddah Corniche Circuit",
+          location: "Jeddah",
+          country: "Saudi Arabia",
+          date: `${nextYear}-03-15`,
+          image: `https://images.unsplash.com/photo-1646222088908-7e5fc1c2d2e3?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1646222088908-7e5fc1c2d2e3?w=400&q=80`,
+          laps: 50,
+          distance: 308.45,
+          lapRecord: {
+            time: "1:30.734",
+            driver: "Lewis Hamilton",
+            year: 2021,
+          },
+        },
+        {
+          id: "2025-3",
+          name: "Australian Grand Prix",
+          circuit: "Albert Park Circuit",
+          location: "Melbourne",
+          country: "Australia",
+          date: `${nextYear}-03-29`,
+          image: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=400&q=80`,
+          laps: 58,
+          distance: 307.574,
+          lapRecord: {
+            time: "1:20.235",
+            driver: "Charles Leclerc",
+            year: 2022,
+          },
+        },
+        {
+          id: "2025-4",
+          name: "Japanese Grand Prix",
+          circuit: "Suzuka Circuit",
+          location: "Suzuka",
+          country: "Japan",
+          date: `${nextYear}-04-12`,
+          image: `https://images.unsplash.com/photo-1506844583096-2f029d8b40f9?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1506844583096-2f029d8b40f9?w=400&q=80`,
+          laps: 53,
+          distance: 307.471,
+          lapRecord: {
+            time: "1:30.983",
+            driver: "Lewis Hamilton",
+            year: 2019,
+          },
+        },
+        {
+          id: "2025-5",
+          name: "Chinese Grand Prix",
+          circuit: "Shanghai International Circuit",
+          location: "Shanghai",
+          country: "China",
+          date: `${nextYear}-04-26`,
+          image: `https://images.unsplash.com/photo-1533106958148-daaeab8b83fe?w=800&q=80`,
+          trackMap: `https://images.unsplash.com/photo-1533106958148-daaeab8b83fe?w=400&q=80`,
+          laps: 56,
+          distance: 305.066,
+          lapRecord: {
+            time: "1:32.238",
+            driver: "Michael Schumacher",
+            year: 2004,
+          },
+        },
+      ];
+
+      // Add next year races to the list
+      races = [...races, ...nextYearRaces];
     }
+
+    // Sort races by date
+    races.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    );
 
     return races;
   } catch (error) {
     console.error("Error fetching race schedule:", error);
 
     // Fallback to hardcoded races if API fails
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const nextYear = currentYear + 1;
+
     return [
       {
         id: "23",
@@ -115,7 +376,7 @@ export async function fetchRaceSchedule(season = "current"): Promise<Race[]> {
         circuit: "Albert Park Circuit",
         location: "Melbourne",
         country: "Australia",
-        date: "2024-03-24", // Set to a future date
+        date: `${currentYear}-03-24`,
         image: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=800&q=80`,
         trackMap: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=400&q=80`,
         laps: 58,
@@ -132,7 +393,7 @@ export async function fetchRaceSchedule(season = "current"): Promise<Race[]> {
         circuit: "Suzuka Circuit",
         location: "Suzuka",
         country: "Japan",
-        date: "2024-04-07", // Set to a future date
+        date: `${currentYear}-04-07`,
         image: `https://images.unsplash.com/photo-1506844583096-2f029d8b40f9?w=800&q=80`,
         trackMap: `https://images.unsplash.com/photo-1506844583096-2f029d8b40f9?w=400&q=80`,
         laps: 53,
@@ -149,7 +410,7 @@ export async function fetchRaceSchedule(season = "current"): Promise<Race[]> {
         circuit: "Shanghai International Circuit",
         location: "Shanghai",
         country: "China",
-        date: "2024-04-21", // Set to a future date
+        date: `${currentYear}-04-21`,
         image: `https://images.unsplash.com/photo-1533106958148-daaeab8b83fe?w=800&q=80`,
         trackMap: `https://images.unsplash.com/photo-1533106958148-daaeab8b83fe?w=400&q=80`,
         laps: 56,
@@ -158,6 +419,57 @@ export async function fetchRaceSchedule(season = "current"): Promise<Race[]> {
           time: "1:32.238",
           driver: "Michael Schumacher",
           year: 2004,
+        },
+      },
+      {
+        id: "2025-1",
+        name: "Bahrain Grand Prix",
+        circuit: "Bahrain International Circuit",
+        location: "Sakhir",
+        country: "Bahrain",
+        date: `${nextYear}-03-08`,
+        image: `https://images.unsplash.com/photo-1687592251375-e5d7a2c1b0c2?w=800&q=80`,
+        trackMap: `https://images.unsplash.com/photo-1687592251375-e5d7a2c1b0c2?w=400&q=80`,
+        laps: 57,
+        distance: 308.238,
+        lapRecord: {
+          time: "1:31.447",
+          driver: "Pedro de la Rosa",
+          year: 2005,
+        },
+      },
+      {
+        id: "2025-2",
+        name: "Saudi Arabian Grand Prix",
+        circuit: "Jeddah Corniche Circuit",
+        location: "Jeddah",
+        country: "Saudi Arabia",
+        date: `${nextYear}-03-15`,
+        image: `https://images.unsplash.com/photo-1646222088908-7e5fc1c2d2e3?w=800&q=80`,
+        trackMap: `https://images.unsplash.com/photo-1646222088908-7e5fc1c2d2e3?w=400&q=80`,
+        laps: 50,
+        distance: 308.45,
+        lapRecord: {
+          time: "1:30.734",
+          driver: "Lewis Hamilton",
+          year: 2021,
+        },
+      },
+      {
+        id: "2025-3",
+        name: "Australian Grand Prix",
+        circuit: "Albert Park Circuit",
+        location: "Melbourne",
+        country: "Australia",
+        date: `${nextYear}-03-29`,
+        image: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=800&q=80`,
+        trackMap: `https://images.unsplash.com/photo-1518539396202-edc0926a759a?w=400&q=80`,
+        laps: 58,
+        distance: 307.574,
+        lapRecord: {
+          time: "1:20.235",
+          driver: "Charles Leclerc",
+          year: 2022,
         },
       },
     ];
@@ -229,9 +541,12 @@ export async function fetchRaceResults(
 /**
  * Generates predictions for upcoming races based on current standings and historical data
  * Enhanced with more precise prediction algorithm and frequent updates
+ * @param raceId The ID of the race to generate predictions for
+ * @param raceStatus Optional status of the race ("Live", "Pre-race", "Post-race", "Upcoming", "Completed")
  */
 export async function generateRacePredictions(
   raceId: string,
+  raceStatus: string = "Upcoming",
 ): Promise<RacePrediction | null> {
   try {
     // Fetch top drivers to use for predictions
@@ -241,11 +556,26 @@ export async function generateRacePredictions(
     // Sort by points (highest first)
     const topDrivers = drivers.sort((a, b) => b.points - a.points);
 
-    // Add some randomness to simulate daily updates
-    const currentHour = new Date().getHours();
-    const currentMinute = new Date().getMinutes();
-    const dailySeed = new Date().toISOString().split("T")[0]; // Changes daily
-    const hourlyVariation = (currentHour * 7 + currentMinute) % 10; // Changes hourly
+    // Add dynamic randomness based on race status
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentSecond = now.getSeconds();
+    const dailySeed = now.toISOString().split("T")[0]; // Changes daily
+
+    // More frequent variations during live race
+    let timeVariation;
+    if (raceStatus === "Live") {
+      // Include seconds for more frequent changes during live race
+      timeVariation =
+        (currentHour * 7 + currentMinute * 3 + currentSecond) % 20;
+    } else if (raceStatus === "Pre-race" || raceStatus === "Post-race") {
+      // More variation before and after race
+      timeVariation = (currentHour * 7 + currentMinute) % 15;
+    } else {
+      // Less variation for upcoming or completed races
+      timeVariation = (currentHour * 7 + currentMinute) % 10;
+    }
 
     // Use more drivers for more comprehensive predictions
     const predictions = topDrivers.map((driver, index) => {
@@ -261,20 +591,31 @@ export async function generateRacePredictions(
       const hash = hashCode(driver.id + dailySeed);
       const dailyVariation = (hash % 10) / 100; // ±0.05 variation
 
-      // Add hourly micro-variations (±2%)
-      const hourlyMicroVariation =
-        (hourlyVariation / 100) * (index % 2 === 0 ? 1 : -1);
+      // Add time-based micro-variations with different magnitudes based on race status
+      let timeMicroVariation;
+      if (raceStatus === "Live") {
+        // More dramatic changes during live race (±5%)
+        timeMicroVariation =
+          (timeVariation / 100) * 2.5 * (index % 2 === 0 ? 1 : -1);
+      } else if (raceStatus === "Pre-race") {
+        // Moderate changes before race (±3%)
+        timeMicroVariation =
+          (timeVariation / 100) * 1.5 * (index % 2 === 0 ? 1 : -1);
+      } else {
+        // Smaller changes for other statuses (±2%)
+        timeMicroVariation = (timeVariation / 100) * (index % 2 === 0 ? 1 : -1);
+      }
 
       // Apply variations with bounds checking
       const winProbability = Math.min(
         0.95,
-        Math.max(0.01, baseWinProb + dailyVariation + hourlyMicroVariation),
+        Math.max(0.01, baseWinProb + dailyVariation + timeMicroVariation),
       );
       const podiumProbability = Math.min(
         0.98,
         Math.max(
           0.05,
-          basePodiumProb + dailyVariation / 2 + hourlyMicroVariation,
+          basePodiumProb + dailyVariation / 2 + timeMicroVariation,
         ),
       );
       const pointsProbability = Math.min(
@@ -321,17 +662,17 @@ export async function generateRacePredictions(
         {
           name: "Current Championship Form",
           description: `${topDrivers[0].name} leads with ${topDrivers[0].points} points, ${topDrivers[1].name} follows with ${topDrivers[1].points} points`,
-          impact: 8 + ((hourlyVariation % 3) - 1), // 7-9 range
+          impact: 8 + ((timeVariation % 3) - 1), // 7-9 range
         },
         {
           name: "Team Performance Trend",
-          description: `${topDrivers[0].team} has shown ${hourlyVariation > 5 ? "improving" : "consistent"} pace in recent races with strong ${hourlyVariation > 7 ? "qualifying" : "race"} performance`,
-          impact: 7 + ((hourlyVariation % 3) - 1), // 6-8 range
+          description: `${topDrivers[0].team} has shown ${timeVariation > 5 ? "improving" : "consistent"} pace in recent races with strong ${timeVariation > 7 ? "qualifying" : "race"} performance`,
+          impact: 7 + ((timeVariation % 3) - 1), // 6-8 range
         },
         {
           name: "Track Compatibility",
-          description: `Based on historical data, this circuit ${hourlyVariation > 5 ? "favors" : "challenges"} ${topDrivers[0].team} cars`,
-          impact: 6 + ((hourlyVariation % 5) - 2), // 4-8 range
+          description: `Based on historical data, this circuit ${timeVariation > 5 ? "favors" : "challenges"} ${topDrivers[0].team} cars`,
+          impact: 6 + ((timeVariation % 5) - 2), // 4-8 range
         },
         {
           name: "Weather Forecast",
